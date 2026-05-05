@@ -1,103 +1,125 @@
-# BloodLink — Smart Blood Donor Connectivity Platform
+# 🩸 BloodLink — Smart Blood Donor Connectivity Platform
 
-A complete MERN stack application for connecting blood donors with requesters in real-time.
+[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-20-339933?logo=node.js&logoColor=white)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Latest-47A248?logo=mongodb&logoColor=white)](https://www.mongodb.com/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Tech Stack
+**BloodLink** is a mission-critical MERN stack application designed to bridge the gap between blood donors and those in urgent need. By leveraging real-time tracking, automated notifications, and a robust verification system, BloodLink ensures that help is always just a few clicks away.
+
+---
+
+## ✨ Key Features
+
+### 🔍 For Requesters
+- **Real-Time Donor Tracking**: Visualize active donors on an interactive Mapbox-powered map.
+- **Smart Matching**: Connect with the nearest compatible donors based on location and blood group.
+- **Urgent Broadcasts**: Send emergency alerts to all eligible donors in the vicinity.
+
+### 🛡️ For Donors
+- **Availability Toggle**: Easily switch your status to available or unavailable.
+- **Trust Badges**: Earn badges for successful donations and verified certificates.
+- **Impact Dashboard**: Track your donation history and the lives you've helped save.
+
+### 🏥 For Hospitals & Admins
+- **Inventory Management**: Track blood stock levels and manage bulk requests.
+- **Donor Verification**: Securely verify medical certificates and donation eligibility.
+- **Advanced Analytics**: Generate PDF and Excel reports on donation trends and regional needs.
+
+---
+
+## 🚀 Tech Stack
 
 | Layer | Technologies |
-|-------|-------------|
-| **Frontend** | React 18, Vite, Tailwind CSS, Redux Toolkit + RTK Query, React Router v6, Framer Motion, Recharts, Mapbox GL JS |
-| **Backend** | Node.js, Express.js, MongoDB + Mongoose, Redis, BullMQ, Socket.io, JWT |
-| **Notifications** | Nodemailer (SMTP), Twilio (SMS/WhatsApp), Socket.io (in-app) |
-| **Reports** | PDFKit, ExcelJS |
-| **Uploads** | Cloudinary + Multer |
+| :--- | :--- |
+| **Frontend** | React 18, Vite, Tailwind CSS 4.0, Redux Toolkit, Framer Motion, Recharts, Mapbox GL JS |
+| **Backend** | Node.js, Express.js, MongoDB (Mongoose), Redis, BullMQ (Background Jobs) |
+| **Real-Time** | Socket.io (Live tracking & In-app alerts) |
+| **Integrations** | Twilio (SMS/WhatsApp), Nodemailer (SMTP), Cloudinary (Image Storage) |
 
-## Quick Start
+---
+
+## 🛠️ Installation & Setup
 
 ### Prerequisites
-- Node.js 18+
-- MongoDB (local or Atlas)
-- Redis (optional, graceful fallback)
+- **Node.js** 18+ 
+- **MongoDB** (Local or Atlas)
+- **Redis** (Required for background jobs & rate limiting)
 
-### Setup
+### Quick Start
 
-```bash
-# 1. Clone and copy env
-cp .env.example server/.env
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/aadhithianm/blood-donor.git
+   cd blood-connect
+   ```
 
-# 2. Start Redis (Required for background jobs & rate limiting)
-# Open a PowerShell terminal in the project root and run:
-Start-Process -FilePath ".\redis-bin\redis-server.exe" -WindowStyle Hidden
+2. **Environment Configuration**
+   ```bash
+   cp .env.example server/.env
+   # Update server/.env with your actual credentials
+   ```
 
-# 3. Install & start server (in a new terminal)
-cd server
-npm install
-npm run dev
+3. **Start Redis Server**
+   If you are on Windows, you can use the included binaries:
+   ```powershell
+   Start-Process -FilePath ".\redis-bin\redis-server.exe" -WindowStyle Hidden
+   ```
 
-# 4. Install & start client (new terminal)
-cd client
-npm install
-npm run dev
-```
+4. **Install Dependencies & Start Development Servers**
 
-Server runs on `http://localhost:5000`, client on `http://localhost:5173`.
+   **Server:**
+   ```bash
+   cd server
+   npm install
+   npm run dev
+   ```
 
-## Architecture
+   **Client:**
+   ```bash
+   cd ../client
+   npm install
+   npm run dev
+   ```
 
-```
+---
+
+## 📂 Project Structure
+
+```text
 blood-connect/
-├── server/                  # Express.js API
-│   ├── config/             # DB, Redis, Cloudinary, Twilio, Mailer, Queue
-│   ├── modules/
-│   │   ├── auth/           # Register, login, OTP, JWT, refresh
-│   │   ├── user/           # Profile, location, avatar
-│   │   ├── donor/          # Availability, verification, badges
-│   │   ├── request/        # Blood request lifecycle
-│   │   ├── hospital/       # License, inventory, donor verification
-│   │   ├── admin/          # CRUD, analytics, reports, broadcast
-│   │   ├── notification/   # Multi-channel dispatch
-│   │   ├── feedback/       # Ratings, trust score
-│   │   └── location/       # Reverse geocoding
-│   ├── jobs/               # BullMQ workers
-│   ├── sockets/            # Socket.io handlers
-│   ├── middlewares/        # Auth, roles, rate-limit, upload, errors
-│   └── utils/              # Response helpers, JWT, haversine
-├── client/                  # React + Vite
+├── client/              # React + Vite Frontend
 │   └── src/
-│       ├── app/            # Redux store, RTK Query
-│       ├── hooks/          # useAuth, useSocket, useGeolocation
-│       ├── layouts/        # AuthLayout, DashboardLayout
-│       ├── modules/        # auth, donor, requester, hospital, admin
-│       └── pages/          # Landing, Notifications, 404
-└── .env.example
+│       ├── app/        # Redux Store & RTK Query
+│       ├── modules/    # Feature-based components (auth, donor, etc.)
+│       └── pages/      # Main application routes
+├── server/              # Express.js API Backend
+│   ├── config/         # Database, Redis, & Service configs
+│   ├── modules/        # Modular API logic (auth, user, donor, etc.)
+│   ├── jobs/           # BullMQ background workers
+│   └── sockets/        # Real-time event handlers
+└── redis-bin/           # Portable Redis binaries for Windows
 ```
 
-## User Roles
+---
 
-| Role | Capabilities |
-|------|-------------|
-| **Donor** | Register, upload cert, toggle availability, track streaks & badges |
-| **Requester** | Create blood requests, track donors live, view history |
-| **Hospital** | Verify donors, manage blood inventory, bulk requests |
-| **Admin** | Manage users, analytics dashboard, emergency broadcast, reports |
+## 📜 License
 
-## API Endpoints
+Distributed under the MIT License. See `LICENSE` for more information.
 
-All responses use `{ success, message, data, pagination? }` envelope.
+---
 
-- `POST /api/auth/register|login|verify-otp|refresh|logout|forgot-password|reset-password`
-- `GET|PUT /api/users/me` · `PUT /api/users/me/location` · `POST /api/users/me/avatar`
-- `GET|PUT /api/donor/profile|availability|dashboard` · `POST /api/donor/upload-certificate`
-- `POST /api/requests` · `GET /api/requests/:id|my` · `POST /api/requests/:id/accept|complete`
-- `GET|PUT /api/hospital/profile|inventory` · `POST /api/hospital/requests/bulk`
-- `GET|PUT|DELETE /api/admin/users/:id` · `POST /api/admin/broadcast` · `GET /api/admin/analytics|reports`
-- `GET /api/notifications` · `PUT /api/notifications/:id/read|read-all`
-- `POST /api/feedback` · `GET /api/feedback/user/:id`
+## 🤝 Contributing
 
-## Real-Time Events
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-Socket.io events for live tracking, request notifications, and emergency broadcasts.
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## License
+---
 
-MIT
+**Developed with ❤️ for the community.**
