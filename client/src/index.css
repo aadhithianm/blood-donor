@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+/* ─── Custom Theme ───────────────────────────────── */
+@theme {
+  --color-primary-50: #fef2f2;
+  --color-primary-100: #fee2e2;
+  --color-primary-200: #fecaca;
+  --color-primary-300: #fca5a5;
+  --color-primary-400: #f87171;
+  --color-primary-500: #ef4444;
+  --color-primary-600: #dc2626;
+  --color-primary-700: #b91c1c;
+  --color-primary-800: #991b1b;
+  --color-primary-900: #7f1d1d;
+  --color-primary-950: #450a0a;
+
+  --color-surface: #0f0f11;
+  --color-surface-2: #18181b;
+  --color-surface-3: #27272a;
+  --color-surface-4: #3f3f46;
+
+  --color-accent: #f43f5e;
+  --color-accent-soft: #fda4af;
+  --color-success: #22c55e;
+  --color-warning: #f59e0b;
+  --color-info: #3b82f6;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Outfit', 'Inter', system-ui, sans-serif;
+}
+
+/* ─── Dark Mode Variables (default) ──────────────── */
+:root {
+  --bg-page: linear-gradient(180deg, #0a0a0b 0%, #150505 50%, #0a0a0b 100%);
+  --bg-surface: #0f0f11;
+  --bg-card: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  --bg-card-border: rgba(255,255,255,0.06);
+  --bg-nav: rgba(10,10,11,0.8);
+  --bg-glass: rgba(255,255,255,0.05);
+  --bg-glass-border: rgba(255,255,255,0.08);
+  --bg-ghost: rgba(255,255,255,0.05);
+  --bg-ghost-border: rgba(255,255,255,0.1);
+  --bg-ghost-hover: rgba(255,255,255,0.1);
+  --bg-ghost-hover-border: rgba(255,255,255,0.2);
+  --bg-input: rgba(255,255,255,0.05);
+  --bg-input-border: rgba(255,255,255,0.1);
+  --bg-ticker: rgba(220,38,38,0.08);
+  --bg-tab-bar: rgba(10,10,11,0.92);
+  --bg-tab-bar-border: rgba(255,255,255,0.07);
+  --bg-drawer: #111113;
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #71717a;
+  --text-ghost-btn: #d4d4d8;
+  --border-footer: rgba(255,255,255,0.07);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.4);
+  --scrollbar-thumb: #3f3f46;
+}
+
+/* ─── Light Mode Variables ───────────────────────── */
+[data-theme="light"] {
+  --bg-page: linear-gradient(180deg, #fafafa 0%, #fff1f2 50%, #fafafa 100%);
+  --bg-surface: #ffffff;
+  --bg-card: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(248,248,250,0.8));
+  --bg-card-border: rgba(220,38,38,0.1);
+  --bg-nav: rgba(255,255,255,0.85);
+  --bg-glass: rgba(255,255,255,0.7);
+  --bg-glass-border: rgba(220,38,38,0.12);
+  --bg-ghost: rgba(0,0,0,0.04);
+  --bg-ghost-border: rgba(0,0,0,0.1);
+  --bg-ghost-hover: rgba(0,0,0,0.08);
+  --bg-ghost-hover-border: rgba(0,0,0,0.18);
+  --bg-input: rgba(0,0,0,0.04);
+  --bg-input-border: rgba(0,0,0,0.1);
+  --bg-ticker: rgba(220,38,38,0.06);
+  --bg-tab-bar: rgba(255,255,255,0.95);
+  --bg-tab-bar-border: rgba(0,0,0,0.08);
+  --bg-drawer: #ffffff;
+  --text-primary: #111111;
+  --text-secondary: #52525b;
+  --text-muted: #71717a;
+  --text-ghost-btn: #3f3f46;
+  --border-footer: rgba(0,0,0,0.08);
+  --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
+  --scrollbar-thumb: #d4d4d8;
+}
+
+/* ─── Base Styles ────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'rlig' 1, 'calt' 1;
+  letter-spacing: -0.01em;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  letter-spacing: -0.02em;
+}
+
+/* ─── Glass Effect ───────────────────────────────── */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--bg-glass-border);
+}
+
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--bg-card-border);
+  border-radius: 16px;
+  box-shadow: var(--shadow-card);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+
+/* ─── Gradient Accents ───────────────────────────── */
+.gradient-primary {
+  background: linear-gradient(135deg, #dc2626, #f43f5e);
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ─── Animations ─────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 8px rgba(220, 38, 38, 0.3); }
+  50% { box-shadow: 0 0 20px rgba(220, 38, 38, 0.6); }
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float-drop {
+  0%, 100% { transform: translateY(0px) rotate(-6deg); }
+  50% { transform: translateY(-18px) rotate(-6deg); }
+}
+
+@keyframes ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-fadeIn { animation: fadeIn 0.4s ease-out; }
+.animate-pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+.animate-slideDown { animation: slideDown 0.3s ease-out; }
+.animate-slideUp { animation: slideUp 0.4s ease-out; }
+.animate-float-drop { animation: float-drop 3.5s ease-in-out infinite; }
+.animate-ticker { animation: ticker-scroll 28s linear infinite; }
+.animate-spin-slow { animation: spin-slow 8s linear infinite; }
+
+/* ─── Button Styles ──────────────────────────────── */
+.btn-primary {
+  @apply px-6 py-2.5 rounded-xl font-medium text-white transition-all duration-200 cursor-pointer;
+  background: linear-gradient(135deg, #dc2626, #e11d48);
+  box-shadow: 0 4px 14px rgba(220, 38, 38, 0.3);
+}
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.4);
+}
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-ghost {
+  @apply px-6 py-2.5 rounded-xl font-medium transition-all duration-200 cursor-pointer;
+  color: var(--text-ghost-btn);
+  background: var(--bg-ghost);
+  border: 1px solid var(--bg-ghost-border);
+}
+.btn-ghost:hover {
+  background: var(--bg-ghost-hover);
+  border-color: var(--bg-ghost-hover-border);
+}
+
+/* ─── Input Styles ───────────────────────────────── */
+.input-field {
+  @apply w-full px-4 py-3 rounded-xl transition-all duration-200;
+  color: var(--text-primary);
+  background: var(--bg-input);
+  border: 1px solid var(--bg-input-border);
+}
+.input-field::placeholder {
+  color: var(--text-muted);
+}
+.input-field:focus {
+  outline: none;
+  border-color: #dc2626;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.15);
+}
+
+/* ─── Status Badges ──────────────────────────────── */
+.badge {
+  @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+}
+.badge-success { @apply bg-green-500/20 text-green-400; }
+.badge-warning { @apply bg-amber-500/20 text-amber-400; }
+.badge-danger { @apply bg-red-500/20 text-red-400; }
+.badge-info { @apply bg-blue-500/20 text-blue-400; }
+.badge-neutral { @apply bg-zinc-500/20 text-zinc-400; }
+
+/* ─── Mapbox Overrides ───────────────────────────── */
+.mapboxgl-canvas { border-radius: 16px; }
+
+/* ─── Bottom Tab Bar Safe Area ───────────────────── */
+.bottom-nav-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
